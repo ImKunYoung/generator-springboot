@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+
+  mariadb:
+    image: mariadb:11.0.3
+    environment:
+      - MYSQL_DATABASE=appdb
+      - MYSQL_USER=appuser
+      - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - "3306:3306"
+
+  localstack:
+    image: localstack/localstack:2.2
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=s3,sqs
+      - DEFAULT_REGION=us-east-1
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - USE_SSL=0
+      - AWS_CBOR_DISABLE=1
+    volumes:
+      - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "../.localstack:/etc/localstack/init/ready.d"  # ready hook

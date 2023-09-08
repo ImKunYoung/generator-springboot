@@ -1,0 +1,16 @@
+{
+  "generator-springboot": {
+    "appName": "generator-springboot",
+    "packageName": "com.example.org",
+    "databaseType": "mariadb",
+    "dbMigrationTool": "flywaydb",
+    "features": [
+      "elk",
+      "monitoring",
+      "localstack"
+    ],
+    "buildTool": "gradle",
+    "packageFolder": "com/example/org",
+    "flywayMigrationCounter": 1
+  }
+}
